@@ -11,7 +11,7 @@ from tqdm import tqdm
 from torchvision.utils import save_image
 
 # Même normaliseur que dans first_try.py
-from mri_image_normalizer import CTImageNormalizer
+from mri_image_normalizer import MRIImageNormalizer
 
 
 @dataclass
@@ -50,7 +50,7 @@ class HealthyMRIDataset(Dataset):
         self.target_size = (target_size, target_size)
         self.normalize_pixels = normalize_pixels
 
-        self.normalizer = CTImageNormalizer(
+        self.normalizer = MRIImageNormalizer(
             target_size=self.target_size,
             normalize_pixels=self.normalize_pixels,
         )

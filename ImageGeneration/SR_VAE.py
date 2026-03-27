@@ -13,7 +13,7 @@ from torchvision.utils import save_image
 from tqdm import tqdm
 
 # Meme normalisation que les autres scripts generation
-from mri_image_normalizer import CTImageNormalizer
+from mri_image_normalizer import MRIImageNormalizer
 
 
 @dataclass
@@ -66,8 +66,8 @@ class SRPairsDataset(Dataset):
         self.high_size = high_size
         self.low_size = low_size
 
-        self.high_normalizer = CTImageNormalizer(target_size=(high_size, high_size), normalize_pixels=normalize_pixels)
-        self.low_normalizer = CTImageNormalizer(target_size=(low_size, low_size), normalize_pixels=normalize_pixels)
+        self.high_normalizer = MRIImageNormalizer(target_size=(high_size, high_size), normalize_pixels=normalize_pixels)
+        self.low_normalizer = MRIImageNormalizer(target_size=(low_size, low_size), normalize_pixels=normalize_pixels)
 
         print(f"\nSRPairsDataset: {len(self.items)} paires")
 

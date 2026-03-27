@@ -11,7 +11,7 @@ from tqdm import tqdm
 from torchvision.utils import save_image
 
 # Normalisation cohérente avec le reste du projet
-from mri_image_normalizer import CTImageNormalizer
+from mri_image_normalizer import MRIImageNormalizer
 
 
 @dataclass
@@ -43,7 +43,7 @@ class GANConfig:
 class HealthyMRIDataset(Dataset):
     """
     Dataset PyTorch pour les images MRI saines uniquement.
-    Utilise CTImageNormalizer pour obtenir des tensors (1, H, W) normalisés.
+    Utilise MRIImageNormalizer pour obtenir des tensors (1, H, W) normalisés.
     """
 
     def __init__(self, healthy_dir: str, target_size: int = 64, normalize_pixels: bool = True):
@@ -51,7 +51,7 @@ class HealthyMRIDataset(Dataset):
         self.target_size = (target_size, target_size)
         self.normalize_pixels = normalize_pixels
 
-        self.normalizer = CTImageNormalizer(
+        self.normalizer = MRIImageNormalizer(
             target_size=self.target_size,
             normalize_pixels=self.normalize_pixels,
         )

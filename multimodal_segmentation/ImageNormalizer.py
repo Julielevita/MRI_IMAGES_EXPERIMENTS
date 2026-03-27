@@ -6,15 +6,15 @@ import glob
 from collections import Counter
 
 
-class MRIImageNormalizer:
+class CTImageNormalizer:
     """
-    Classe pour normaliser les images MRI pour la classification CNN.
+    Classe pour normaliser les images CT scan pour la classification CNN.
     Normalise la taille et les échelles de gris des images.
     """
     
     def __init__(self, target_size: Tuple[int, int] = (224, 224), normalize_pixels: bool = True):
         """
-        Initialise le normaliseur d'images MRI.
+        Initialise le normaliseur d'images CT.
         
         Args:
             target_size: Taille cible pour toutes les images (largeur, hauteur). Par défaut (224, 224).
@@ -268,7 +268,7 @@ class MRIImageNormalizer:
         }
         
         # Recommandation de taille
-        recommended_size, reason = MRIImageNormalizer._recommend_size(
+        recommended_size, reason = CTImageNormalizer._recommend_size(
             size_distribution, stats, dimensions
         )
         
@@ -282,7 +282,7 @@ class MRIImageNormalizer:
         
         # Affiche les résultats si demandé
         if verbose:
-            MRIImageNormalizer._print_analysis_results(result)
+            CTImageNormalizer._print_analysis_results(result)
         
         return result
     
@@ -420,7 +420,7 @@ if __name__ == "__main__":
     
     # ÉTAPE 1: Analyse automatique des dimensions et recommandation
     print("ÉTAPE 1: Analyse des dimensions...")
-    analysis = MRIImageNormalizer.analyze_dimensions(
+    analysis = CTImageNormalizer.analyze_dimensions(
         healthy_dir, 
         max_samples=500,  # Analyse jusqu'à 500 images pour être rapide
         verbose=True
@@ -432,7 +432,7 @@ if __name__ == "__main__":
     
     # ÉTAPE 2: Initialise le normaliseur avec la taille recommandée
     print(f"\nÉTAPE 2: Initialisation avec la taille recommandée...")
-    normalizer = MRIImageNormalizer(
+    normalizer = CTImageNormalizer(
         target_size=recommended_size, 
         normalize_pixels=True
     )
